@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import Suplierservice from "../apis/suplierservice";
+import Supplierproductservice from "../apis/supplierproductservice";
 
 export default {
   name: "suppliers-list",
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     retrieveSuppliers() {
-      Suplierservice.getAll()
+      Supplierproductservice.getAll()
         .then(response => {
           this.suppliers = response.data;
           console.log(response.data);
@@ -90,7 +90,7 @@ export default {
     },
 
     removeSupplier(id) {
-      Suplierservice.delete(id)
+      Supplierproductservice.delete(id)
         .then(response => {
           console.log(response.data);
           this.refreshList();
@@ -101,7 +101,7 @@ export default {
     },
 
     searchTitle() {
-      Suplierservice.findByTitle(this.name)
+      Supplierproductservice.findByTitle(this.name)
         .then(response => {
           this.suppliers = response.data;
           console.log(response.data);

@@ -7,12 +7,17 @@
         <span>{{ user.email }}</span>
       </div>
     </div>
+    <div>
+      <canvas id="bar-chart"></canvas>
+    </div>
   </div>
 </template>
 
 <script>
 import User from "../apis/User";
 import { mapState } from "vuex";
+import Chart from "chart.js";
+import barChartData from "../bar-data.js";
 
 export default {
   computed: {
@@ -20,11 +25,17 @@ export default {
       user: state => state.auth.user
     })
   },
-
+  data() {
+    return {
+      barChartData: barChartData
+    };
+  },
   mounted() {
     User.auth().then(response => {
       this.$store.commit("AUTH_USER", response.data.success);
     });
+    const ctx1 = document.getElementById("bar-chart");
+    new Chart(ctx1, this.barChartData);
   }
 };
 </script>
